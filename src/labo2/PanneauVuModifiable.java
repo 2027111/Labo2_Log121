@@ -14,17 +14,17 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
-public class PanneauVu extends JPanel{
+public class PanneauVuModifiable extends PanneauVu{
 
 	int borderSize = 5;
-	Color borderColor = Color.BLACK;
+	Color borderColer = Color.BLUE;
 	
-	public PanneauVu(){
-		setBorder(BorderFactory.createLineBorder(borderColor, borderSize));
+	public PanneauVuModifiable(){
+		setBorder(BorderFactory.createLineBorder(Color.BLUE, borderSize));
 	}
 	
 
-	public PanneauVu(int borderSize){
+	public PanneauVuModifiable(int borderSize){
 		this.borderSize = borderSize;
 	}
 	@Override

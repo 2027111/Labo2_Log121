@@ -2,6 +2,7 @@ package labo2;
 
 
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,11 +15,20 @@ import javax.swing.JPanel;
 public class PanneauPrincipal extends JPanel{
 private static final long serialVersionUID = 1L;
 	
-
+	GridLayout layout;
 
 	
 
 	public PanneauPrincipal() {
+		
+		layout = new GridLayout(1, 3);
+		PanneauVu vuun = new PanneauVu();
+		PanneauVu vudeux = new PanneauVu();
+		PanneauVu vutrois = new PanneauVu();
+		setLayout(layout);
+		add(vuun);
+		add(vudeux);
+		add(vutrois);
 		}
 	
 		

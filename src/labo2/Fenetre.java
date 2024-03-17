@@ -29,17 +29,10 @@ public class Fenetre extends JFrame{
 		setLocationRelativeTo(null);
 		// Emp�cher la redimension de la fen�tre
 		setResizable(false);
-		GridLayout layout = new GridLayout(1, 3);
 		PanneauPrincipal panneauPrincipal = new PanneauPrincipal();
 
-		PanneauVu vuun = new PanneauVu();
-		PanneauVu vudeux = new PanneauVu();
-		PanneauVu vutrois = new PanneauVu();
+
 		add(panneauPrincipal);
-		panneauPrincipal.setLayout(layout);
-		panneauPrincipal.add(vuun);
-		panneauPrincipal.add(vudeux);
-		panneauPrincipal.add(vutrois);
 	}
 	
 	
