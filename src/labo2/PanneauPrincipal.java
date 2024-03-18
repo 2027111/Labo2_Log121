@@ -23,8 +23,8 @@ private static final long serialVersionUID = 1L;
 		
 		layout = new GridLayout(1, 3);
 		PanneauVu vuun = new PanneauVu();
-		PanneauVu vudeux = new PanneauVu();
-		PanneauVu vutrois = new PanneauVu();
+		PanneauVu vudeux = new PanneauVuModifiable();
+		PanneauVuModifiable vutrois = new PanneauVuModifiable();
 		setLayout(layout);
 		add(vuun);
 		add(vudeux);
