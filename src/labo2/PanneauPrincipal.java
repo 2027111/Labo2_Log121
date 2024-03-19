@@ -16,20 +16,30 @@ public class PanneauPrincipal extends JPanel{
 private static final long serialVersionUID = 1L;
 	
 	GridLayout layout;
+	PanneauVu vuun = new PanneauVu();
+	PanneauVuModifiable vudeux = new PanneauVuModifiable();
+	PanneauVuModifiable vutrois = new PanneauVuModifiable();
+	
 
 	
 
 	public PanneauPrincipal() {
 		
 		layout = new GridLayout(1, 3);
-		PanneauVu vuun = new PanneauVu();
-		PanneauVu vudeux = new PanneauVuModifiable();
-		PanneauVuModifiable vutrois = new PanneauVuModifiable();
 		setLayout(layout);
 		add(vuun);
 		add(vudeux);
 		add(vutrois);
 		}
+
+
+
+	public void Attacher(Fenetre fenetre) {
+		// TODO Auto-generated method stub
+		vuun.AjouterObservateur(fenetre);
+		vudeux.AjouterObservateur(fenetre);
+		vutrois.AjouterObservateur(fenetre);
+	}
 	
 		
 	}

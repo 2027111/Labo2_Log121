@@ -9,11 +9,13 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JFrame;
 
-public class Fenetre extends JFrame{
+public class Fenetre extends JFrame implements Observateur{
 	
 	private static final long serialVersionUID = 1L;
 	private static final String TITRE_FENETRE = "Laboratoire 2 : LOG121 - Architecture MVC";
 	private static final Dimension DIMENSION = new Dimension(1600, 900);
+	
+	
 	
 	public Fenetre() {
 		MenuFenetre menuFenetre = new MenuFenetre();
@@ -30,9 +32,21 @@ public class Fenetre extends JFrame{
 		// Emp�cher la redimension de la fen�tre
 		setResizable(false);
 		PanneauPrincipal panneauPrincipal = new PanneauPrincipal();
-
-
+		panneauPrincipal.Attacher(this);
 		add(panneauPrincipal);
+		repaint();
+	}
+	
+	
+	
+
+
+
+
+	@Override
+	public void actualiser() {
+		repaint();
+		
 	}
 	
 	
