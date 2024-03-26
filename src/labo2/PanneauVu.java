@@ -17,29 +17,60 @@ import javax.swing.SwingUtilities;
 
 public class PanneauVu extends SujetObserver{
 
-	int borderSize = 5;
+	int borderSize = 2;
 	Color borderColor = Color.BLACK;
-	Point position = new Point(0, 0);
-    private Point currentMovement = new Point(0, 0);
+	Perspective perspective = new Perspective();
     
 
     public PanneauVu() {
     	borderColor = Color.BLUE;
         setBorder(BorderFactory.createLineBorder(borderColor, borderSize));
+        
+		NotifierObservateurs();
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawRect(currentMovement.x, currentMovement.y, 55, 55);
+        g.drawRect(perspective.GetPosition().x + borderSize, perspective.GetPosition().y + borderSize, perspective.GetSize(), perspective.GetSize());
     }
 	public void Deplacer(int x, int y) {
+		Point newPosition = perspective.GetPosition();
 		
+		newPosition.x += x;
+		newPosition.y +=y;
+		perspective.SetPosition(newPosition);
+		FixPosition();
+	}
+	
+	public void FixPosition() {
+
+		Point newPosition = perspective.GetPosition();
+		newPosition.x = Clamp.clamp(perspective.GetPosition().x, 0, this.getSize().width - (perspective.GetSize() + borderSize+ borderSize));
+		newPosition.y =Clamp.clamp(perspective.GetPosition().y, 0, this.getSize().height - (perspective.GetSize()+ borderSize+ borderSize));
+		perspective.SetPosition(newPosition);
+		NotifierObservateurs();
 	}
 
 	public void zoomer(int notches) {
 		// TODO Auto-generated method stub
+		int size = perspective.GetSize();
+		size += notches;
+		perspective.SetSize(size);
+        FixPosition();
 		
+	}
+
+	public void Paste() {
+		// TODO Auto-generated method stub
+		perspective = new Perspective(PressePapier.CurrentPerspective);
+        FixPosition();
+	}
+
+	public void Copy() {
+		// TODO Auto-generated method stub
+		PressePapier.CurrentPerspective = new Perspective(perspective);
+        FixPosition();
 	}
 		
 }

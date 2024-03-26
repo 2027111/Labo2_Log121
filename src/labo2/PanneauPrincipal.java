@@ -16,9 +16,9 @@ public class PanneauPrincipal extends JPanel{
 private static final long serialVersionUID = 1L;
 	
 	GridLayout layout;
-	PanneauVu vuun = new PanneauVu();
-	PanneauVuModifiable vudeux = new PanneauVuModifiable();
-	PanneauVuModifiable vutrois = new PanneauVuModifiable();
+	PanneauControleur vuun = new PanneauControleur();
+	PanneauControleur vudeux = new PanneauControleur();
+	PanneauControleur vutrois = new PanneauControleur();
 	
 
 	

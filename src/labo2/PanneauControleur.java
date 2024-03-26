@@ -1,5 +1,6 @@
 package labo2;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,11 +16,11 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
     private int startX, startY = 0;
     boolean dragging = false;
     private JPopupMenu popupMenu;
-    boolean isThumbnail = false;
     PanneauVu panneauInterne;
 
-    public PanneauControleur(boolean thumbnail) {
-        isThumbnail = thumbnail;
+    public PanneauControleur() {
+        GridLayout layout = new GridLayout(1, 1);
+		setLayout(layout);
         panneauInterne = new PanneauVu();
         add(panneauInterne);
         addMouseMotionListener(this);
@@ -42,11 +43,11 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
         int x = e.getXOnScreen();
         int y = e.getYOnScreen();
 
-        int deltaX = x - startX;
-        int deltaY = y - startY;
+        int deltaX = Clamp.clamp(x - startX, -15, 15);
+        int deltaY = Clamp.clamp(y - startY, -15, 15);
+        
 
-        panneauInterne.Deplacer(x, y);
-        System.out.println("DeltaX: " + deltaX + ", DeltaY: " + deltaY);
+        panneauInterne.Deplacer(deltaX, deltaY);
 
         // Trigger an event with the x and y movement of the mouse
         // You can define your event handling logic here
@@ -56,7 +57,11 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
         startY = y;
         dragging = false;
     }
-
+    public void AjouterObservateur(Observateur O) {
+    	if(panneauInterne != null) {
+    		panneauInterne.AjouterObservateur(O);
+    	}
+    }
     @Override
     public void mouseMoved(MouseEvent e) {
         // Not needed, but required to implement MouseMotionListener
@@ -75,11 +80,15 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
         copyItem.addActionListener((ActionEvent e) -> {
             // Perform copy action
             System.out.println("Copy action performed");
+        	panneauInterne.Copy();
+            
         });
 
         pasteItem.addActionListener((ActionEvent e) -> {
             // Perform paste action
+
             System.out.println("Paste action performed");
+        	panneauInterne.Paste();
         });
 
         popupMenu.add(copyItem);
