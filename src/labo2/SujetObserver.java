@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-public class SujetObserver extends JPanel{
+public class SujetObserver{
 
 	public ArrayList<Observateur> observateurActuels = new ArrayList<>();;
 	public void AjouterObservateur(Observateur o) {

@@ -15,10 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
-public class PanneauVu extends SujetObserver{
+public class PanneauVu extends JPanel{
 
 	int borderSize = 2;
-	Color borderColor = Color.BLACK;
+	Color borderColor = Color.BLUE;
 	Perspective perspective = new Perspective();
     
 
@@ -26,7 +26,14 @@ public class PanneauVu extends SujetObserver{
     	borderColor = Color.BLUE;
         setBorder(BorderFactory.createLineBorder(borderColor, borderSize));
         
-		NotifierObservateurs();
+    }
+    
+
+    public PanneauVu(Color color, int BorderSize) {
+    	borderSize = BorderSize;
+    	borderColor = color;
+        setBorder(BorderFactory.createLineBorder(borderColor, borderSize));
+        
     }
 
     @Override
@@ -49,7 +56,7 @@ public class PanneauVu extends SujetObserver{
 		newPosition.x = Clamp.clamp(perspective.GetPosition().x, 0, this.getSize().width - (perspective.GetSize() + borderSize+ borderSize));
 		newPosition.y =Clamp.clamp(perspective.GetPosition().y, 0, this.getSize().height - (perspective.GetSize()+ borderSize+ borderSize));
 		perspective.SetPosition(newPosition);
-		NotifierObservateurs();
+		
 	}
 
 	public void zoomer(int notches) {
@@ -71,6 +78,17 @@ public class PanneauVu extends SujetObserver{
 		// TODO Auto-generated method stub
 		PressePapier.CurrentPerspective = new Perspective(perspective);
         FixPosition();
+	}
+
+	public Perspective GetPerspective() {
+		// TODO Auto-generated method stub
+		return perspective;
+	}
+
+	public void GiveCommande(ICommand Commande) {
+		// TODO Auto-generated method stub
+		perspective.GiveCommande(Commande);
+		
 	}
 		
 }

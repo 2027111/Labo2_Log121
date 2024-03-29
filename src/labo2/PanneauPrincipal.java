@@ -16,7 +16,7 @@ public class PanneauPrincipal extends JPanel{
 private static final long serialVersionUID = 1L;
 	
 	GridLayout layout;
-	PanneauControleur vuun = new PanneauControleur();
+	PanneauThumbnail vuun = new PanneauThumbnail();
 	PanneauControleur vudeux = new PanneauControleur();
 	PanneauControleur vutrois = new PanneauControleur();
 	
@@ -30,13 +30,15 @@ private static final long serialVersionUID = 1L;
 		add(vuun);
 		add(vudeux);
 		add(vutrois);
+		
+		
+		GestionCommande patron = new GestionCommande();
 		}
 
 
 
 	public void Attacher(Fenetre fenetre) {
 		// TODO Auto-generated method stub
-		vuun.AjouterObservateur(fenetre);
 		vudeux.AjouterObservateur(fenetre);
 		vutrois.AjouterObservateur(fenetre);
 	}

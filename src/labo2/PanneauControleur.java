@@ -7,13 +7,19 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import javax.swing.Timer;
+
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 public class PanneauControleur extends JPanel implements MouseMotionListener, MouseWheelListener {
 
-    private int startX, startY = 0;
+	
+	private Timer wheelStopTimer;
+    private int accumulatedWheelRotation = 0; // Tracks total rotation amount for a "wheel movement
+	private int startX, startY = 0; // Starting drag positions
+    private int totalDeltaX = 0, totalDeltaY = 0; // Total drag movement
     boolean dragging = false;
     private JPopupMenu popupMenu;
     PanneauVu panneauInterne;
@@ -26,40 +32,74 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
         addMouseMotionListener(this);
         addMouseWheelListener(this);
         initializePopupMenu(); // Call to initialize the popup menu
+        
+        
+        
+        // Existing constructor code...
+
+        // Initialize the timer with a delay and a lambda to execute when the timer fires
+        wheelStopTimer = new Timer(500, (e) -> {
+            // This code is executed when the wheel has stopped moving
+            if (accumulatedWheelRotation != 0) {
+                // Create and execute your command here using accumulatedWheelRotation
+                ZoomCommande zoomCommande = new ZoomCommande(panneauInterne.GetPerspective(), accumulatedWheelRotation);
+                panneauInterne.GiveCommande(zoomCommande);
+
+                // Reset for the next series of wheel movements
+                accumulatedWheelRotation = 0;
+            }
+        });
+        wheelStopTimer.setRepeats(false); // Ensure the timer only fires once per sequence of wheel events
     }
+        
+    
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         int notches = e.getWheelRotation();
         if (notches != 0) {
-            // Zoom in
-            panneauInterne.zoomer(notches);
+            // Zoom in or out based on notches
+            accumulatedWheelRotation += notches;
+
+            // Restart the timer every time a new wheel event occurs
+            if (wheelStopTimer.isRunning()) {
+                wheelStopTimer.restart();
+            } else {
+                wheelStopTimer.start();
+            }
         }
     }
-
     @Override
     public void mouseDragged(MouseEvent e) {
-        dragging = true;
-        int x = e.getXOnScreen();
-        int y = e.getYOnScreen();
+        if (!dragging) {
+            startX = e.getXOnScreen();
+            startY = e.getYOnScreen();
+            dragging = true;
+        }
+        // Note: We're not moving the panneauInterne here anymore
+    }
 
-        int deltaX = Clamp.clamp(x - startX, -15, 15);
-        int deltaY = Clamp.clamp(y - startY, -15, 15);
-        
+    // New method to process the end of a drag operation
+    private void endDrag(MouseEvent e) {
+        if (dragging) {
+            int endX = e.getXOnScreen();
+            int endY = e.getYOnScreen();
+            totalDeltaX = endX - startX;
+            totalDeltaY = endY - startY;
 
-        panneauInterne.Deplacer(deltaX, deltaY);
+            // Here you create and execute the DeplacerCommande
+            DeplacerCommande deplacerCommande = new DeplacerCommande(panneauInterne.GetPerspective(), totalDeltaX, totalDeltaY);
+            panneauInterne.GiveCommande(deplacerCommande);
 
-        // Trigger an event with the x and y movement of the mouse
-        // You can define your event handling logic here
-
-        // Update the starting position for the next drag event
-        startX = x;
-        startY = y;
-        dragging = false;
+            // Resetting for the next drag operation
+            dragging = false;
+            totalDeltaX = 0;
+            totalDeltaY = 0;
+        }
     }
     public void AjouterObservateur(Observateur O) {
     	if(panneauInterne != null) {
-    		panneauInterne.AjouterObservateur(O);
+    		panneauInterne.GetPerspective().AjouterObservateur(O);
     	}
     }
     @Override
@@ -71,6 +111,7 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
         }
 
     }
+    
 
     private void initializePopupMenu() {
         popupMenu = new JPopupMenu();
@@ -103,13 +144,18 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
             @Override
             public void mouseReleased(MouseEvent e) {
                 maybeShowPopup(e);
+                if (dragging) {
+                    endDrag(e); // This will now properly conclude the drag operation
+                }
             }
+
 
             private void maybeShowPopup(MouseEvent e) {
                 if (e.isPopupTrigger()) {
                     popupMenu.show(e.getComponent(), e.getX(), e.getY());
                 }
             }
+            
         });
     }
 }
