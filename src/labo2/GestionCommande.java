@@ -25,14 +25,19 @@ public class GestionCommande {
 	}
 	
 	public void AnnulerCommande() {
+		if(HistoriqueCommandePasser.capacity() > 0) {
 		ICommand commande = HistoriqueCommandePasser.pop();
 		commande.undo();
+		}
 	}
+	
 	
 	public void RetablirCommande() {
 
+		if(HistoriqueCommandeRetablie.capacity() > 0) {
 		ICommand commande = HistoriqueCommandeRetablie.pop();
 		commande.execute();
+		}
 	}
 
 	public void ClearRetablie() {
