@@ -11,11 +11,17 @@ public class ZoomCommande implements ICommand{
 	public ZoomCommande(Perspective Target, int zoomFactor) {
 		this.Target = Target;
 		this.zoomFactor = zoomFactor;
+		newCommande = true;
 	}
 	@Override
 	public void execute() {
 		// TODO Auto-generated method stub
 		Target.Zoomer(zoomFactor);
+		if(newCommande) {
+			GestionCommande.Singleton.ClearRetablie();
+			newCommande = false;
+		}
+		GestionCommande.Singleton.ajouterCommandePasser(this);
 		
 	}
 
@@ -24,6 +30,7 @@ public class ZoomCommande implements ICommand{
 		// TODO Auto-generated method stub
 
 		Target.Zoomer(-zoomFactor);
+		GestionCommande.Singleton.ajouterCommandeAnnuler(this);
 	}
 
 }

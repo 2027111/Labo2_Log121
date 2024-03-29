@@ -92,14 +92,14 @@ public class MenuFenetre extends JMenuBar {
 		menuModifier.add(menuAnnuler);
 		menuModifier.add(menuRetablir);
 
-		menuRetablir.addActionListener((ActionEvent e) -> {
+		menuAnnuler.addActionListener((ActionEvent e) -> {
 			// Ouvrir la fen�tre de s�lection
 			// TODO - R�cup�rer la bonne strat�gie de vente
 			//Faire truc machian redo, undo
 			GestionCommande.Singleton.AnnulerCommande();
 		});
 
-		menuAnnuler.addActionListener((ActionEvent e) -> {
+		menuRetablir.addActionListener((ActionEvent e) -> {
 			// Ouvrir la fen�tre de s�lection
 			// TODO - R�cup�rer la bonne strat�gie de vente
 			//Faire truc machian redo, undo

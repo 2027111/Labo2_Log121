@@ -24,11 +24,11 @@ public class DeplacerCommande implements ICommand{
 	public void execute() {
 		
 		Target.Deplacer(deltaX, deltaY);
-		newCommande = true;
-		GestionCommande.Singleton.ajouterCommandePasser(this);
 		if(newCommande) {
 			GestionCommande.Singleton.ClearRetablie();
+			newCommande = false;
 		}
+		GestionCommande.Singleton.ajouterCommandePasser(this);
 		
 	}
 
