@@ -85,6 +85,11 @@ public class Perspective extends SujetObserver{
 		int newSizeX = size.x + (zoomFactor*5);
 		int newSizeY = (int)(((float)size.y/(float)size.x) * newSizeX);
 		
+		if(newSizeY < panelDimensions.y) {
+			newSizeY = panelDimensions.y;
+
+			newSizeX = (int)(((float)currentImage.getWidth() / (float)currentImage.getHeight()) * newSizeY);
+		}
 		System.out.println(newSizeX + " " + newSizeY);
 		
 		SetSize(new Point(newSizeX, newSizeY));
