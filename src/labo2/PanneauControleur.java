@@ -69,6 +69,7 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
             }
         }
     }
+    
     @Override
     public void mouseDragged(MouseEvent e) {
         if (!dragging) {
@@ -97,11 +98,13 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
             totalDeltaY = 0;
         }
     }
+    
     public void AjouterObservateur(Observateur O) {
     	if(panneauInterne != null) {
     		panneauInterne.GetPerspective().AjouterObservateur(O);
     	}
     }
+    
     @Override
     public void mouseMoved(MouseEvent e) {
         // Not needed, but required to implement MouseMotionListener
@@ -111,7 +114,6 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
         }
 
     }
-    
 
     private void initializePopupMenu() {
         popupMenu = new JPopupMenu();
@@ -129,6 +131,7 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
             // Perform paste action
 
             System.out.println("Paste action performed");
+            
         	panneauInterne.Paste();
         });
 

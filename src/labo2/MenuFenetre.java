@@ -36,7 +36,7 @@ public class MenuFenetre extends JMenuBar {
 	private static final String MENU_PRESSE_TITRE = "Presse-Papier";
 	private static final String MENU_PRESSE_STRATEGIE = "Choisir Strategie";
 
-	
+	private PanneauPrincipal panneauPrincipal;
 	
 	public MenuFenetre() {
 		ajouterMenuFichier();
@@ -67,6 +67,7 @@ public class MenuFenetre extends JMenuBar {
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				// TODO - Parser le fichier XML s�lectionn�
 				File selectedFile = fileChooser.getSelectedFile();
+				panneauPrincipal.SetImage(selectedFile.getAbsolutePath());
 				System.out.println(selectedFile.getAbsolutePath());
 			}
 		});
@@ -123,6 +124,12 @@ public class MenuFenetre extends JMenuBar {
 		});
 
 		add(menuAide);
+	}
+
+
+	public void SetPanneau(PanneauPrincipal panneauPrincipal) {
+		// TODO Auto-generated method stub
+		this.panneauPrincipal = panneauPrincipal;
 	}
 	
 }

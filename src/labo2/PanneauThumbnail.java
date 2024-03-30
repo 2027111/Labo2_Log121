@@ -25,11 +25,10 @@ public class PanneauThumbnail extends JPanel{
 		setLayout(layout);
         panneauInterne = new PanneauVu(Color.BLACK, 2);
         add(panneauInterne);
-        
+        panneauInterne.SetAsThumbnail();
         
         
     }
-        
     
 
 

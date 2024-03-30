@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
@@ -39,45 +40,31 @@ public class PanneauVu extends JPanel{
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawRect(perspective.GetPosition().x + borderSize, perspective.GetPosition().y + borderSize, perspective.GetSize(), perspective.GetSize());
+        g.drawImage(perspective.currentImage, perspective.GetPosition().x + borderSize, perspective.GetPosition().y + borderSize, perspective.GetSize().x, perspective.GetSize().y, this);
     }
-	public void Deplacer(int x, int y) {
-		Point newPosition = perspective.GetPosition();
-		
-		newPosition.x += x;
-		newPosition.y +=y;
-		perspective.SetPosition(newPosition);
-		FixPosition();
-	}
-	
-	public void FixPosition() {
 
-		Point newPosition = perspective.GetPosition();
-		newPosition.x = Clamp.clamp(perspective.GetPosition().x, 0, this.getSize().width - (perspective.GetSize() + borderSize+ borderSize));
-		newPosition.y =Clamp.clamp(perspective.GetPosition().y, 0, this.getSize().height - (perspective.GetSize()+ borderSize+ borderSize));
-		perspective.SetPosition(newPosition);
-		
-	}
+    public void SetAsThumbnail() {
+    	
+    	int yPos = this.getHeight()/2;
+    	int xSize = this.getWidth();
+    	
+    	perspective.SetAsThumbnail(yPos, xSize);
+    	
+    }
 
-	public void zoomer(int notches) {
-		// TODO Auto-generated method stub
-		int size = perspective.GetSize();
-		size += notches;
-		perspective.SetSize(size);
-        FixPosition();
-		
-	}
+
 
 	public void Paste() {
 		// TODO Auto-generated method stub
-		perspective = new Perspective(PressePapier.CurrentPerspective);
-        FixPosition();
+		perspective.SetAlikeTo(PressePapier.pressePapier);
+		
+        
 	}
 
 	public void Copy() {
 		// TODO Auto-generated method stub
-		PressePapier.CurrentPerspective = new Perspective(perspective);
-        FixPosition();
+		PressePapier.AddPress(perspective);
+        
 	}
 
 	public Perspective GetPerspective() {
@@ -88,6 +75,14 @@ public class PanneauVu extends JPanel{
 	public void GiveCommande(ICommand Commande) {
 		// TODO Auto-generated method stub
 		perspective.GiveCommande(Commande);
+		
+	}
+
+
+	public void SetImage(BufferedImage image) {
+		// TODO Auto-generated method stub
+		perspective.SetPanelDimensions(this.getWidth(), this.getHeight());
+		perspective.SetImage(image);
 		
 	}
 		

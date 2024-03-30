@@ -36,11 +36,29 @@ private static final long serialVersionUID = 1L;
 		}
 
 
-
 	public void Attacher(Fenetre fenetre) {
 		// TODO Auto-generated method stub
 		vudeux.AjouterObservateur(fenetre);
 		vutrois.AjouterObservateur(fenetre);
+	}
+
+	public void SetImage(String absolutePath) {
+		
+		BufferedImage img = null;
+		try {
+			img = ImageIO.read(new File(absolutePath));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			img = null;
+		}
+		
+		if(img != null) {
+			// TODO Auto-generated method stub
+			vuun.panneauInterne.SetImage(img);
+			vudeux.panneauInterne.SetImage(img);
+			vutrois.panneauInterne.SetImage(img);
+			vuun.panneauInterne.SetAsThumbnail();
+		}
 	}
 	
 		

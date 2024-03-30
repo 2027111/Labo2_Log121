@@ -25,16 +25,17 @@ public class Fenetre extends JFrame implements Observateur{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle(TITRE_FENETRE);
 		setSize(DIMENSION);
+		PanneauPrincipal panneauPrincipal = new PanneauPrincipal();
+		panneauPrincipal.Attacher(this);
+		add(panneauPrincipal);
+		menuFenetre.SetPanneau(panneauPrincipal);
+		repaint();
 		// Rendre la fen�tre visible
 		setVisible(true);
 		// Mettre la fen�tre au centre de l'�cran
 		setLocationRelativeTo(null);
 		// Emp�cher la redimension de la fen�tre
 		setResizable(false);
-		PanneauPrincipal panneauPrincipal = new PanneauPrincipal();
-		panneauPrincipal.Attacher(this);
-		add(panneauPrincipal);
-		repaint();
 	}
 	
 	
