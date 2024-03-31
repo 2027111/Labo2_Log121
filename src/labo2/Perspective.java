@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class Perspective extends SujetObserver{
 
-	int cubeSize = 55;
+	
 	private Point panelDimensions = new Point(400, 800);
 	private Point size = new Point(55, 55);
     private Point position = new Point(0, 0);
@@ -82,15 +82,14 @@ public class Perspective extends SujetObserver{
 
 	public void Zoomer(int zoomFactor) {
 		// TODO Auto-generated method stub
-		int newSizeX = size.x + (zoomFactor*5);
+		int newSizeX = size.x + (zoomFactor);
 		int newSizeY = (int)(((float)size.y/(float)size.x) * newSizeX);
 		
 		if(newSizeY < panelDimensions.y) {
 			newSizeY = panelDimensions.y;
-
 			newSizeX = (int)(((float)currentImage.getWidth() / (float)currentImage.getHeight()) * newSizeY);
 		}
-		System.out.println(newSizeX + " " + newSizeY);
+		System.out.println(newSizeX);
 		
 		SetSize(new Point(newSizeX, newSizeY));
 		
@@ -105,8 +104,8 @@ public class Perspective extends SujetObserver{
 	        // Calculate the width of the image such that the aspect ratio is maintained.
 	        size.x = (int)(((float)currentImage.getWidth() / (float)currentImage.getHeight()) * size.y);
 	        
-	        
-	        NotifierObservateurs();
+	      
+	        FixPosition();
 	    } else {
 	        // Handle the case where panelDimensions or currentImage is null.
 	        System.out.println("Panel dimensions or image is null.");

@@ -19,8 +19,7 @@ private static final long serialVersionUID = 1L;
 	PanneauThumbnail vuun = new PanneauThumbnail();
 	PanneauControleur vudeux = new PanneauControleur();
 	PanneauControleur vutrois = new PanneauControleur();
-	
-
+	public String currentImgPath = null;
 	
 
 	public PanneauPrincipal() {
@@ -47,9 +46,11 @@ private static final long serialVersionUID = 1L;
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File(absolutePath));
+			currentImgPath = absolutePath;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			img = null;
+			currentImgPath = null;
 		}
 		
 		if(img != null) {

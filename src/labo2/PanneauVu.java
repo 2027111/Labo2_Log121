@@ -85,5 +85,20 @@ public class PanneauVu extends JPanel{
 		perspective.SetImage(image);
 		
 	}
+
+
+	public Point GetDeltaPosition(Point comparativePosition) {
+		// TODO Auto-generated method stub
+		int DeltaX =  comparativePosition.x - perspective.GetPosition().x;
+		int DeltaY =  comparativePosition.y - perspective.GetPosition().y;
+		return new Point(DeltaX, DeltaY);
+	}
+	public int GetDeltaSize(int Size) {
+		// TODO Auto-generated method stub
+		int DeltaSize =  Size - perspective.GetSize().x;
+		System.out.println(Size + " " + perspective.GetSize().x);
+		return DeltaSize;
+	}
+		
 		
 }

@@ -42,7 +42,7 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
             // This code is executed when the wheel has stopped moving
             if (accumulatedWheelRotation != 0) {
                 // Create and execute your command here using accumulatedWheelRotation
-                ZoomCommande zoomCommande = new ZoomCommande(panneauInterne.GetPerspective(), accumulatedWheelRotation);
+                ZoomCommande zoomCommande = new ZoomCommande(panneauInterne.GetPerspective(), accumulatedWheelRotation * 15);
                 panneauInterne.GiveCommande(zoomCommande);
 
                 // Reset for the next series of wheel movements
@@ -131,8 +131,11 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
             // Perform paste action
 
             System.out.println("Paste action performed");
+            ZoomCommande newZoomCommande = new ZoomCommande(panneauInterne.GetPerspective(), panneauInterne.GetDeltaSize(PressePapier.pressePapier.size.x));
+        	panneauInterne.GiveCommande(newZoomCommande);
+        	DeplacerCommande newMoveCommande = new DeplacerCommande(panneauInterne.GetPerspective(), panneauInterne.GetDeltaPosition(PressePapier.pressePapier.position).x, panneauInterne.GetDeltaPosition(PressePapier.pressePapier.position).y);
+        	panneauInterne.GiveCommande(newMoveCommande);
             
-        	panneauInterne.Paste();
         });
 
         popupMenu.add(copyItem);
