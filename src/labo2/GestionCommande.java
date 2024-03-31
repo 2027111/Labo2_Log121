@@ -25,7 +25,7 @@ public class GestionCommande {
 	}
 	
 	public void AnnulerCommande() {
-		if(HistoriqueCommandePasser.capacity() > 0) {
+		if(HistoriqueCommandePasser.size() > 0) {
 			ICommand commande = HistoriqueCommandePasser.pop();
 			commande.undo();
 		}
@@ -34,7 +34,7 @@ public class GestionCommande {
 	
 	public void RetablirCommande() {
 
-		if(HistoriqueCommandeRetablie.capacity() > 0) {
+		if(HistoriqueCommandeRetablie.size() > 0) {
 			ICommand commande = HistoriqueCommandeRetablie.pop();
 			commande.execute();
 		}
