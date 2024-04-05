@@ -1,4 +1,4 @@
-package labo2.controleur;
+package labo2.Controleur;
 
 import java.util.ArrayList;
 

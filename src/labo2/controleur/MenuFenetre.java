@@ -1,4 +1,4 @@
-package labo2.controleur;
+package labo2.Controleur;
 
 
 import java.awt.event.ActionEvent;
@@ -21,7 +21,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import labo2.Command.GestionCommande;
-import labo2.controleur.FenetreStrategie;
+import labo2.Controleur.FenetreStrategie;
 
 public class MenuFenetre extends JMenuBar {
 

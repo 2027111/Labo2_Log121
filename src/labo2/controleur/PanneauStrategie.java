@@ -1,4 +1,4 @@
-package labo2.controleur;
+package labo2.Controleur;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;

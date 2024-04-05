@@ -5,8 +5,8 @@ import java.util.Stack;
 public class GestionCommande {
 
 	
-	public Stack<ICommand> HistoriqueCommandePasser = new Stack();
-	public Stack<ICommand> HistoriqueCommandeRetablie = new Stack();
+	public Stack<ICommand> HistoriqueCommandePasser = new Stack<ICommand>();
+	public Stack<ICommand> HistoriqueCommandeRetablie = new Stack<ICommand>();
 	public static GestionCommande Singleton;
 	
 	public GestionCommande() {
