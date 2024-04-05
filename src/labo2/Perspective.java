@@ -55,7 +55,7 @@ public class Perspective extends SujetObserver{
 	    newPosition.x = Clamp.clamp(GetPosition().x, minX, maxX);
 	    newPosition.y = Clamp.clamp(GetPosition().y, minY, maxY);
 	    
-	    SetPosition(newPosition);
+	    //SetPosition(newPosition);
 	    NotifierObservateurs();
 	}
 

@@ -1,11 +1,10 @@
 package labo2;
 
-public class DeplacerCommande implements ICommand{
+public class DeplacerCommande extends CommandeDecoratrice{
 
 	public Perspective Target;
 	public int deltaX = 0;
 	public int deltaY = 0;
-	public boolean newCommande = false;
 	
 	
 	
@@ -28,7 +27,8 @@ public class DeplacerCommande implements ICommand{
 			GestionCommande.Singleton.ClearRetablie();
 			newCommande = false;
 		}
-		GestionCommande.Singleton.ajouterCommandePasser(this);
+
+		super.execute();
 		
 	}
 
@@ -37,7 +37,8 @@ public class DeplacerCommande implements ICommand{
 		// TODO Auto-generated method stub
 
 		Target.Deplacer(-deltaX, -deltaY);
-		GestionCommande.Singleton.ajouterCommandeAnnuler(this);
+
+		super.undo();
 	}
 
 }

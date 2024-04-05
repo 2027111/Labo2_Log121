@@ -1,5 +1,6 @@
 package labo2;
 
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -8,7 +9,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.Timer;
-
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -132,9 +132,11 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
 
             System.out.println("Paste action performed");
             ZoomCommande newZoomCommande = new ZoomCommande(panneauInterne.GetPerspective(), panneauInterne.GetDeltaSize(PressePapier.pressePapier.size.x));
-        	panneauInterne.GiveCommande(newZoomCommande);
-        	DeplacerCommande newMoveCommande = new DeplacerCommande(panneauInterne.GetPerspective(), panneauInterne.GetDeltaPosition(PressePapier.pressePapier.position).x, panneauInterne.GetDeltaPosition(PressePapier.pressePapier.position).y);
-        	panneauInterne.GiveCommande(newMoveCommande);
+        	
+        	
+            DeplacerCommande newMoveCommande = new DeplacerCommande(panneauInterne.GetPerspective(), panneauInterne.GetDeltaPosition(PressePapier.pressePapier.position).x, panneauInterne.GetDeltaPosition(PressePapier.pressePapier.position).y);
+            newZoomCommande.SetCommande(newMoveCommande);
+            panneauInterne.GiveCommande(newZoomCommande);
             
         });
 
@@ -164,4 +166,8 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
             
         });
     }
+
+
+
+
 }

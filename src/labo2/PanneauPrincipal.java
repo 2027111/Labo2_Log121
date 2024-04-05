@@ -1,6 +1,7 @@
 package labo2;
 
 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Point;

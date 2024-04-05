@@ -1,6 +1,6 @@
 package labo2;
 
-public class ZoomCommande implements ICommand{
+public class ZoomCommande extends CommandeDecoratrice{
 
 	
 
@@ -21,8 +21,7 @@ public class ZoomCommande implements ICommand{
 			GestionCommande.Singleton.ClearRetablie();
 			newCommande = false;
 		}
-		GestionCommande.Singleton.ajouterCommandePasser(this);
-		
+		super.execute();
 	}
 
 	@Override
@@ -30,7 +29,7 @@ public class ZoomCommande implements ICommand{
 		// TODO Auto-generated method stub
 
 		Target.Zoomer(-zoomFactor);
-		GestionCommande.Singleton.ajouterCommandeAnnuler(this);
+		super.undo();
 	}
 
 }
