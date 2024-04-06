@@ -44,4 +44,6 @@ public class GestionCommande {
 		HistoriqueCommandeRetablie.clear();
 		
 	}
+	
+	
 }

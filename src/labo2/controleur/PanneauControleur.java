@@ -127,7 +127,7 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
         copyItem.addActionListener((ActionEvent e) -> {
             // Perform copy action
             System.out.println("Copy action performed");
-    		PressePapier.AddPress(panneauInterne.GetPerspective());
+    		PressePapier.Copier(panneauInterne.GetPerspective());
             
         });
 
@@ -135,12 +135,7 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
             // Perform paste action
 
             System.out.println("Paste action performed");
-            ZoomCommande newZoomCommande = new ZoomCommande(panneauInterne.GetPerspective(), panneauInterne.GetDeltaSize(PressePapier.pressePapier.GetPresseSize().x));
-        	
-        	
-            DeplacerCommande newMoveCommande = new DeplacerCommande(panneauInterne.GetPerspective(), panneauInterne.GetDeltaPosition(PressePapier.pressePapier.GetPressePosition()).x, panneauInterne.GetDeltaPosition(PressePapier.pressePapier.GetPressePosition()).y);
-            newZoomCommande.SetCommande(newMoveCommande);
-            panneauInterne.GiveCommande(newZoomCommande);
+            PressePapier.Coller(panneauInterne.GetPerspective());
             
         });
 
@@ -150,6 +145,8 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+
+                pasteItem.setEnabled(PressePapier.pressePapier != null);
                 maybeShowPopup(e);
             }
 

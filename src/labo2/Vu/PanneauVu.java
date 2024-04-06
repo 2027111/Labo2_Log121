@@ -44,7 +44,10 @@ public class PanneauVu extends JPanel{
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(perspective.GetImage(), perspective.GetPosition().x + borderSize, perspective.GetPosition().y + borderSize, perspective.GetSize().x, perspective.GetSize().y, this);
+        if(perspective != null) {      
+        	g.drawImage(perspective.GetImage(), perspective.GetPosition().x + borderSize, perspective.GetPosition().y + borderSize, perspective.GetSize().x, perspective.GetSize().y, this);
+        
+        }
     }
 
     public void SetAsThumbnail() {
@@ -81,18 +84,7 @@ public class PanneauVu extends JPanel{
 	}
 
 
-	public Point GetDeltaPosition(Point comparativePosition) {
-		// TODO Auto-generated method stub
-		int DeltaX =  comparativePosition.x - perspective.GetPosition().x;
-		int DeltaY =  comparativePosition.y - perspective.GetPosition().y;
-		return new Point(DeltaX, DeltaY);
-	}
-	public int GetDeltaSize(int Size) {
-		// TODO Auto-generated method stub
-		int DeltaSize =  Size - perspective.GetSize().x;
-		System.out.println(Size + " " + perspective.GetSize().x);
-		return DeltaSize;
-	}
+
 		
 		
 }

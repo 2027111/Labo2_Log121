@@ -47,6 +47,18 @@ public class Perspective extends SujetObserver{
 		return size;
 	}
 	
+	public Point GetDeltaPosition(Point comparativePosition) {
+		// TODO Auto-generated method stub
+		int DeltaX =  comparativePosition.x - GetPosition().x;
+		int DeltaY =  comparativePosition.y - GetPosition().y;
+		return new Point(DeltaX, DeltaY);
+	}
+	public int GetDeltaSize(int Size) {
+		// TODO Auto-generated method stub
+		int DeltaSize =  Size - GetSize().x;
+		return DeltaSize;
+	}
+	
 	public void FixPosition() {
 	    Point newPosition = GetPosition();
 	    
@@ -95,7 +107,6 @@ public class Perspective extends SujetObserver{
 			newSizeY = panelDimensions.y;
 			newSizeX = (int)(((float)currentImage.getWidth() / (float)currentImage.getHeight()) * newSizeY);
 		}
-		System.out.println(newSizeX);
 		
 		SetSize(new Point(newSizeX, newSizeY));
 		
@@ -109,7 +120,7 @@ public class Perspective extends SujetObserver{
 	        size.y = panelDimensions.y;
 	        // Calculate the width of the image such that the aspect ratio is maintained.
 	        size.x = (int)(((float)currentImage.getWidth() / (float)currentImage.getHeight()) * size.y);
-	        
+	        SetPosition(new Point(0, 0));
 	      
 	        FixPosition();
 	    } else {

@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
+import labo2.PressePapier.PressePapier;
+
 public class PanneauStrategie extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -20,20 +22,30 @@ public class PanneauStrategie extends JPanel {
 
 		 JCheckBox strategie1 = new  JCheckBox("Position");
 		 JCheckBox strategie2 = new  JCheckBox("Niveau de Zoom");	
-		
+		 strategie1.setSelected(PressePapier.CopyPos);
+		 strategie2.setSelected(PressePapier.CopyZoom);
 		JButton boutonConfirmer = new JButton("Confirmer");
+		JButton boutonAnnuler = new JButton("Annuler");
 
 		boutonConfirmer.addActionListener((ActionEvent e) -> {
 			// TODO - Appeler la bonne strat�gie
-			System.out.println(strategie1.isEnabled());
-			System.out.println(strategie2.isEnabled());
+			System.out.println(strategie1.isSelected());
+			System.out.println(strategie2.isSelected());
+			
+			PressePapier.SetStrategie(strategie1.isSelected(), strategie2.isSelected());
+			
 
+			// Fermer la fen�tre du composant
+			SwingUtilities.getWindowAncestor((Component) e.getSource()).dispose();
+		});
+		boutonAnnuler.addActionListener((ActionEvent e) -> {
 			// Fermer la fen�tre du composant
 			SwingUtilities.getWindowAncestor((Component) e.getSource()).dispose();
 		});
 		add(strategie1);
 		add(strategie2);			
-		add(boutonConfirmer);
+		add(boutonConfirmer);		
+		add(boutonAnnuler);
 
 	}
 
