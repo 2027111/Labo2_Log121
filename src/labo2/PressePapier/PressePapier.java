@@ -54,7 +54,7 @@ public class PressePapier {
 
 	public static void SetStrategie(boolean strategiePosition, boolean strategieSize) {
 		// TODO Auto-generated method stub
-		if(false == (strategiePosition && strategieSize)) {
+		if(false == strategiePosition && false == strategieSize) {
 			
 		}else {
 			CopyPos = strategiePosition;
@@ -62,11 +62,14 @@ public class PressePapier {
 			
 			if(CopyPos && CopyZoom) {
 				strategie = new StrategiePositionZoom();
+				System.out.println("Strategie Position Zoom");
 			}else if(!CopyPos && CopyZoom) {
 				strategie = new StrategieZoom();
+				System.out.println("Strategie Zoom");
 				
 			}else if(CopyPos && !CopyZoom) {
-				strategie = new StrategiePosition();;
+				strategie = new StrategiePosition();
+				System.out.println("Strategie Position");
 				
 			}
 			

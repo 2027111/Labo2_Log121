@@ -17,7 +17,7 @@ public class StrategieZoom implements StrategieCopierColler{
 		PressePapier pressePapier = new PressePapier();
 
 		pressePapier.SetSize(new Point(perspective.GetSize()));
-		return null;
+		return pressePapier;
 		
 	}
 

@@ -17,7 +17,7 @@ public class StrategiePosition implements StrategieCopierColler{
 		PressePapier pressePapier = new PressePapier();
 
 		pressePapier.SetPosition(new Point(perspective.GetPosition()));
-		return null;
+		return pressePapier;
 		
 	}
 
