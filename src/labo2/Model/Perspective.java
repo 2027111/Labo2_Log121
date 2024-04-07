@@ -27,26 +27,28 @@ public class Perspective extends SujetObserver  implements Serializable{
     private String currentImagePath = "";
     private transient BufferedImage currentImage = null;
 
-    public void SetPanelDimensions(int x, int y) {
-    	panelDimensions = new Point(x, y);
-    }
-	public Perspective() {
+    public Perspective() {
 		// TODO Auto-generated constructor stub
 		NotifierObservateurs();
 	}
 	
-	public void Match(Perspective perspective) {
-		SetImage(perspective.currentImagePath);
-		SetPosition(perspective.GetPosition());
-		SetSize(perspective.GetSize());
-		FixPosition();
-	}
-
+	
 	public Perspective(Perspective perspective) {
 		SetPosition(perspective.GetPosition());
 		SetSize(perspective.GetSize());
 		//NotifierObservateurs();
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public void SetPanelDimensions(int x, int y) {
+		panelDimensions = new Point(x, y);
+	}
+	public void Match(Perspective perspective) {
+		SetImage(perspective.currentImagePath);
+		SetPosition(perspective.GetPosition());
+		SetSize(perspective.GetSize());
+		FixPosition();
 	}
 
 	public void SetPosition(Point newPosition) {

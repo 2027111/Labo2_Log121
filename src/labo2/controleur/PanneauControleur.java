@@ -1,5 +1,6 @@
 package labo2.Controleur;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -20,7 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
-public class PanneauControleur extends JPanel implements MouseMotionListener, MouseWheelListener {
+public class PanneauControleur extends PanneauThumbnail implements MouseMotionListener, MouseWheelListener {
 
 	
 	private Timer wheelStopTimer;
@@ -29,13 +30,9 @@ public class PanneauControleur extends JPanel implements MouseMotionListener, Mo
     private int totalDeltaX = 0, totalDeltaY = 0; // Total drag movement
     boolean dragging = false;
     private JPopupMenu popupMenu;
-    PanneauVu panneauInterne;
 
     public PanneauControleur() {
-        GridLayout layout = new GridLayout(1, 1);
-		setLayout(layout);
-        panneauInterne = new PanneauVu();
-        add(panneauInterne);
+    	panneauInterne.SetBorderColor(Color.BLUE);
         addMouseMotionListener(this);
         addMouseWheelListener(this);
         initializePopupMenu(); // Call to initialize the popup menu

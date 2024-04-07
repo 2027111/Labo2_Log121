@@ -84,6 +84,14 @@ public class PanneauVu extends JPanel{
 	}
 
 
+	public void SetBorderColor(Color blue) {
+		// TODO Auto-generated method stub
+		borderColor = blue;
+        setBorder(BorderFactory.createLineBorder(borderColor, borderSize));
+		
+	}
+
+
 
 		
 		
