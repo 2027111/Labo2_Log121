@@ -4,16 +4,19 @@ package labo2.Controleur;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import labo2.Command.GestionCommande;
+import labo2.Model.Perspective;
 
 public class PanneauPrincipal extends JPanel{
 private static final long serialVersionUID = 1L;
@@ -22,7 +25,7 @@ private static final long serialVersionUID = 1L;
 	PanneauThumbnail vuun = new PanneauThumbnail();
 	PanneauControleur vudeux = new PanneauControleur();
 	PanneauControleur vutrois = new PanneauControleur();
-	public String currentImgPath = null;
+	
 	
 
 	public PanneauPrincipal() {
@@ -46,24 +49,49 @@ private static final long serialVersionUID = 1L;
 
 	public void SetImage(String absolutePath) {
 		
-		BufferedImage img = null;
-		try {
-			img = ImageIO.read(new File(absolutePath));
-			currentImgPath = absolutePath;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			img = null;
-			currentImgPath = null;
-		}
 		
-		if(img != null) {
+		if(absolutePath != null) {
 			// TODO Auto-generated method stub
-			vuun.panneauInterne.SetImage(img);
-			vudeux.panneauInterne.SetImage(img);
-			vutrois.panneauInterne.SetImage(img);
+			vuun.panneauInterne.SetImage(absolutePath);
 			vuun.panneauInterne.SetAsThumbnail();
+			vudeux.panneauInterne.SetImage(absolutePath);
+			vutrois.panneauInterne.SetImage(absolutePath);
 		}
 	}
+
+
+	public Object GetSerialization() {
+		// TODO Auto-generated method stub
+		return vudeux.panneauInterne.GetPerspective();
+	}
+	
+	
+	public void SetSerialization(ArrayList<Perspective> perspectives) {
+		vuun.panneauInterne.GetPerspective().Match(perspectives.get(0));
+		vudeux.panneauInterne.GetPerspective().Match(perspectives.get(1));
+		vutrois.panneauInterne.GetPerspective().Match(perspectives.get(2));
+	}
+
+
+	public ArrayList<Perspective> GetPerspectives() {
+		
+		
+		
+		
+		ArrayList<Perspective> perspectives = new ArrayList<>();
+		perspectives.add(vuun.panneauInterne.GetPerspective());
+		perspectives.add(vudeux.panneauInterne.GetPerspective());
+		perspectives.add(vutrois.panneauInterne.GetPerspective());
+		// TODO Auto-generated method stub
+		return perspectives;
+	}
+
+
+	public boolean HasImageLoaded() {
+		// TODO Auto-generated method stub
+		return vuun.panneauInterne.GetPerspective().GetImage() != null;
+	}
+	
 	
 		
 	}

@@ -76,7 +76,7 @@ public class PanneauVu extends JPanel{
 	}
 
 
-	public void SetImage(BufferedImage image) {
+	public void SetImage(String image) {
 		// TODO Auto-generated method stub
 		perspective.SetPanelDimensions(this.getWidth(), this.getHeight());
 		perspective.SetImage(image);

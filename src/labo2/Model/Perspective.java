@@ -3,19 +3,29 @@ package labo2.Model;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+
+import javax.imageio.ImageIO;
 
 import labo2.Command.ICommand;
 import labo2.Observateur.SujetObserver;
 import labo2.PressePapier.PressePapier;
 import labo2.Utils.Clamp;
 
-public class Perspective extends SujetObserver{
+public class Perspective extends SujetObserver  implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Point panelDimensions = new Point(400, 800);
 	private Point size = new Point(55, 55);
     private Point position = new Point(0, 0);
-    BufferedImage currentImage;
+    private String currentImagePath = "";
+    private transient BufferedImage currentImage = null;
 
     public void SetPanelDimensions(int x, int y) {
     	panelDimensions = new Point(x, y);
@@ -24,11 +34,18 @@ public class Perspective extends SujetObserver{
 		// TODO Auto-generated constructor stub
 		NotifierObservateurs();
 	}
+	
+	public void Match(Perspective perspective) {
+		SetImage(perspective.currentImagePath);
+		SetPosition(perspective.GetPosition());
+		SetSize(perspective.GetSize());
+		FixPosition();
+	}
 
 	public Perspective(Perspective perspective) {
 		SetPosition(perspective.GetPosition());
 		SetSize(perspective.GetSize());
-		NotifierObservateurs();
+		//NotifierObservateurs();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -112,8 +129,19 @@ public class Perspective extends SujetObserver{
 		
 	}
 
-	public void SetImage(BufferedImage image) {
-	    currentImage = image;
+	public void SetImage(String imagePath) {
+		BufferedImage img = null;
+		try {
+			img = ImageIO.read(new File(imagePath));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			img = null;
+		}
+		
+		if(img != null) {
+			currentImagePath = imagePath;
+
+		currentImage = img;
 	    // Ensure the panel's dimensions are considered in case they haven't been set elsewhere
 	    if (panelDimensions != null && currentImage != null) {
 	        // Maintain aspect ratio of the image based on the panel's height.
@@ -127,6 +155,8 @@ public class Perspective extends SujetObserver{
 	        // Handle the case where panelDimensions or currentImage is null.
 	        System.out.println("Panel dimensions or image is null.");
 	    }
+
+		}
 	}
 
 	
@@ -138,7 +168,7 @@ public class Perspective extends SujetObserver{
 		SetPosition(new Point(0, yPos));
 		SetSize(new Point(xSize, ySize));
 	}
-	public Image GetImage() {
+	public BufferedImage GetImage() {
 		// TODO Auto-generated method stub
 		return currentImage;
 	}
